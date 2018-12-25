@@ -1,0 +1,42 @@
+<div [ngClass]="groupColWidth" mojDragAndDrop (fileDrop)="onDrop($event)">
+    <label-before-content [labelStyle]="labelStyle" [forId]="identifier" [labelAlign]="labelAlign" [isAutoWidth]="isLabelAutowidth" [isRequiredIndication]="isControlRequired$ | async" [widthColumns]="labelWidthColumns" [isLabelAboveControl]="isLabelAboveControl" [textKey]="labelTextKey">
+    </label-before-content>
+    <div [ngClass]="controlColWidth">
+        <div class="fu-wrap">
+            <div *ngIf="designType==1" class="file-name">
+                <div *ngIf="value && value[0] else dragToHere">{{value[0].name}}</div>
+                <ng-template #dragToHere>אפשר גם לגרור לכאן</ng-template>
+            </div>
+            <input [id]="identifier" [name]="identifier" type="file" [title]="tooltipTextKey | translate" accept="{{manipulateFileTyps}}" [multiple]="multiple" (change)="fileChange($event)"
+                [disabled]="disabled || !addMoreFileEnable" [attr.aria-label]="labelTextKey | translate" />
+            <label [for]="identifier" [title]="tooltipTextKey | translate" [class.single]="designType==1">
+                <i class="fas fa-paperclip"></i>
+                <span *ngIf="designType==0">{{ labelTextKey | translate }}</span>
+            </label>
+            <button *ngIf="designType==1 && value && value.length>0" class="single-delete far fa-trash-alt trash-alt" title="{{'MojTexts.fu.deleteFile' | translate}}" 
+                [attr.aria-label]="'MojTexts.fu.deleteFile' | translate" [disabled]="disabled" (click)="deleteFile()"></button>
+            <validation-messages [forId]="identifier"
+                                    *ngIf="control.invalid || control.submitted"
+                                    [controlName]="labelTextKey" 
+                                    [messages]="control.errors">
+            </validation-messages>
+        </div>
+
+        <div class="progress" *ngIf="showProgress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar"
+                [attr.aria-valuemin]="0" [attr.aria-valuemax]="100" 
+                [ngStyle]="{ width: totalProgress + '%' }"
+                [attr.aria-valuenow]="totalProgress">
+            </div>
+        </div>
+
+        <div class="message">{{errMsg}}</div>
+
+        <ul class="ul-files" *ngIf="designType==0 && showFileList">
+            <li *ngFor="let file of value">
+                <span>{{file.name}}</span>
+                <button class="far fa-trash-alt trash-alt" (click)="deleteFile(file)" title="{{'MojTexts.fu.deleteFile' | translate}}" [attr.aria-label]="'MojTexts.fu.deleteFile' | translate"></button>
+            </li>
+        </ul>
+    </div>
+</div>

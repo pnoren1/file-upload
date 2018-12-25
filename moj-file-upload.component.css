@@ -1,0 +1,99 @@
+.fu-wrap {
+    display: flex;
+    position: relative;
+}
+.file-name {
+    padding: 5px;
+    margin-left: 10px;
+    background-color: #E8E6E7;
+    border: 1px solid #DCDCDC;
+    border-radius: 4px;
+    color: #696969;
+    height: 30px;
+    box-sizing: border-box;
+    flex: 1 1 100%;
+    
+}
+.file-name div {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+input + label, .single-delete {
+    width: 120px;
+    /* width: auto; */
+    height: 30px;
+    color: #184e84;
+    font-weight: normal;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #c2c7cb;
+    border-radius: 3px;
+    background: linear-gradient(#fffffd, #f5f5f7);
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+}
+input + label.single, .single-delete {
+    flex: 0 0 30px;
+    margin-left: 5px;
+}
+input + label:not(.single) i {
+    margin-left: 5px;
+}
+
+input[disabled] + label, .single-delete[disabled] {
+    border: 1px solid #C8CAC9;
+    cursor: auto !important;
+    color: #C8CAC9;
+}
+input[disabled] + label span {
+    color: #C8CAC9;
+}
+
+input:focus:not([disabled]) + label, input:not([disabled]) + label:hover, .single-delete:not([disabled]):focus, .single-delete:not([disabled]):hover {
+    background: linear-gradient(#fffffd, #f5f5f7);
+    border: 1px solid #FABEA1;
+    text-decoration: underline;
+}
+
+.ul-files {
+    padding: 0; margin: 5px 0 0; list-style-type: none;
+}
+.ul-files li {
+    display: flex;
+    padding: 2px 10px;
+}
+.ul-files li:hover {
+    background-color: #f5f5f7;
+}
+
+.ul-files li span {
+    color: #00a1Ce;
+    flex: 1 1 100%;
+}
+.ul-files li button {
+    color: #00a1Ce;
+    background-color: transparent;
+    border: none;
+    flex: 0 0 30px;
+}
+.ul-files li:hover span, .ul-files li:hover button {
+    color: #017ea1;
+}
+
+.message {
+    color: red;
+}
