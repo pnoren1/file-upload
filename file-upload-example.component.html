@@ -1,0 +1,27 @@
+﻿<form #frmSearch="ngForm">
+<moj-line>
+	<moj-line>
+		<moj-checkbox [(ngModel)]="isRequired1" name="isRequired1"></moj-checkbox>
+		<moj-checkbox [(ngModel)]="isRequired2" name="isRequired2"></moj-checkbox>
+	</moj-line>
+	<moj-line>
+		<moj-file-upload name="fldold1" [labelTextKey]="'Texts.fileToUpload'" [enabledFileTypes]="'pdf|png|jpg'" 
+			[(ngModel)]="files" [isLabelAboveControl]="true" [controlWidthColumns]="4"
+			[required]="isRequired1" (fileUploadComplete)="fileUploadComplete($event)">
+		</moj-file-upload>
+		<moj-file-upload name="fld3" [labelTextKey]="'Texts.fileToUpload2'" [enabledFileTypes]="'pdf'" 
+			[(ngModel)]="files2" [isLabelAboveControl]="true" [controlWidthColumns]="4"
+			[designType]="fuDesignType.Single" [required]="isRequired2">
+		</moj-file-upload>
+	</moj-line>
+	<ul>
+		<li *ngFor="let item of files">{{item.name}} == GUID: {{item.GUID}} == docType: {{item.docType}}</li>
+	</ul>
+</moj-line>
+
+{{frmSearch.valid}}
+
+<moj-submit-button [form]="frmSearch"></moj-submit-button>
+
+</form>
+
